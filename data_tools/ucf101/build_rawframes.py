@@ -86,11 +86,11 @@ def run_warp_optical_flow(vid_item, dev_id=0):
 
 def parse_args():
     parser = argparse.ArgumentParser(description='extract optical flows')
-    parser.add_argument('--src_dir', default='/data/DataSets/THUMOS14/video/val', type=str)
-    parser.add_argument('--out_dir', default='/data/DataSets/THUMOS14/frames/val', type=str)
+    parser.add_argument('--src_dir', default='/data/DataSets/UCF101/UCF-101', type=str)
+    parser.add_argument('--out_dir', default='/data/DataSets/UCF101/rawframes', type=str)
     parser.add_argument('--level', type=int,
                         choices=[1, 2],
-                        default=1)
+                        default=2)
     parser.add_argument('--num_worker', type=int, default=32)
     parser.add_argument('--flow_type', type=str,
                         default=None, choices=[None, 'tvl1', 'warp_tvl1'])
@@ -98,7 +98,7 @@ def parse_args():
                         default='/data/codes/mmaction/third_party/dense_flow/')
     parser.add_argument("--out_format", type=str, default='dir',
                         choices=['dir', 'zip'], help='output format')
-    parser.add_argument("--ext", type=str, default='mp4',
+    parser.add_argument("--ext", type=str, default='avi',
                         choices=['avi', 'mp4'], help='video file extensions')
     parser.add_argument("--new_width", type=int, default=0,
                         help='resize image width')

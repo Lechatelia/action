@@ -213,6 +213,7 @@ def parse_directory(path, key_func=lambda x: x[-11:],
 
     def count_files(directory, prefix_list):
         lst = os.listdir(directory)
+        lst  += os.listdir(directory.replace("rawframes", "flows")) # 因为我们把RGB和flow是分开地方放的
         cnt_list = [len(fnmatch.filter(lst, x+'*')) for x in prefix_list]
         return cnt_list
 
@@ -269,7 +270,7 @@ def build_split_list(split, frame_info, shuffle=False):
 
 def parse_ucf101_splits(level):
     class_ind = [x.strip().split()
-                 for x in open('data/ucf101/annotations/classInd.txt')]
+                 for x in open('/data/DataSets/UCF101/annotations/classInd.txt')]
     class_mapping = {x[1]: int(x[0]) - 1 for x in class_ind}
 
     def line2rec(line):
@@ -282,9 +283,9 @@ def parse_ucf101_splits(level):
     splits = []
     for i in range(1, 4):
         train_list = [line2rec(x) for x in open(
-            'data/ucf101/annotations/trainlist{:02d}.txt'.format(i))]
+            '/data/DataSets/UCF101/annotations/trainlist{:02d}.txt'.format(i))]
         test_list = [line2rec(x) for x in open(
-            'data/ucf101/annotations/testlist{:02d}.txt'.format(i))]
+            '/data/DataSets/UCF101/annotations/testlist{:02d}.txt'.format(i))]
         splits.append((train_list, test_list))
     return splits
 
